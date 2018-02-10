@@ -26,13 +26,25 @@ public class QueenBoard{
 	return str;
     }
 
-    private void /*boolean*/ addQueen(int r, int c){}
+    private void /*boolean*/ addQueen(int r, int c){
+	board[r][c] = -1;
+	for( int iR = 0; iR < board.length; iR++){
+	    for(int iC = 0; iC < board.length; iC++){
+		if( r == iR || c == iC){
+		    board[iR][iC] += 1;
+		}
+	    }
+	}
+    }
+
+    
     private void /*boolean*/ removeQueen(int r, int c){}
 
 
 
     public static void main( String[] args){
 	QueenBoard fourbyfour = new QueenBoard(4);
+	fourbyfour.addQueen(2, 3);
 	System.out.println(fourbyfour.toString());
     }
 
