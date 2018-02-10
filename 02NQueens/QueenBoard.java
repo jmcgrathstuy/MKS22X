@@ -31,4 +31,9 @@ public class QueenBoard{
 
 
 
+    public static void main( String[] args){
+	QueenBoard fourbyfour = new QueenBoard(4);
+	System.out.println(fourbyfour.toString());
+    }
+
 }
