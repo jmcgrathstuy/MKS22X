@@ -27,18 +27,42 @@ public class QueenBoard{
     }
 
     private void /*boolean*/ addQueen(int r, int c){
+	if( board[r][c] != 0){
+	    return false;
+	}else{
 	board[r][c] = -1;
-	for( int iR = 0; iR < board.length; iR++){
-	    for(int iC = 0; iC < board.length; iC++){
-		if( r == iR || c == iC){
-		    board[iR][iC] += 1;
-		}
+	//Add horiz and 
+	for( int iR = c, iU = r, iD = r, iL = c; /*make this work again*/; iR++, iU++, iD--, iL--){
+	    if(c != iR && c != iL){
+		board[iU][iR] += 1;
+		board[iD][iR] += 1;
+	    }
+	    if(r != iD && r != iU)
+		board[iR][c] += 1;
+	        board[r][iC] += 1;
 	    }
 	}
-    }
+	
+	}
+    
+    
 
     
-    private void /*boolean*/ removeQueen(int r, int c){}
+/*private void /*boolean removeQueen(int r, int c){
+
+          board[r][c] = 0;
+          for( int iC = 0,  iR = 0; iC < board.length; iC++, iR++){
+             if(c != iC){
+		 board[r][iC] -= 1;
+             }
+             if(r != iR){
+                board[iR][c] -= 1;
+             }
+          }
+	  
+	   }
+	   }*/
+
 
 
 
