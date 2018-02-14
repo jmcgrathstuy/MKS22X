@@ -16,9 +16,9 @@ public class QueenBoard{
 	for( int stepperRow = 0; stepperRow < board.length; stepperRow++){
 	    for(int stepperCol = 0; stepperCol < board.length; stepperCol++){
 			if( board[stepperRow][stepperCol] == -1){
-				str += "Q";
+				str += "Q ";
 			}else{
-				str += board[stepperRow][stepperCol];
+				str += "_ ";
 			}
 			}
 	    str += "\n";
@@ -99,18 +99,61 @@ public class QueenBoard{
 	
 	
 	}
+	
+	public boolean solveH( int col){
+		if( col == board.length){
+			return true;
+		}
+		
+		for( int row = 0; row < board.length; row++){
+			if( addQueen( row, col)){
+				if( solveH( col + 1)){
+					return true;
+				}
+				removeQueen( row, col);
+			}
+		}
+		return false;
+	
+	}
+	
+	
+	
+	public boolean solve(){
+		for( int iR = 0; iR < board.length; iR++){
+			for( int iC = 0; iC < board.length; iC++){
+				if( board[iR][iC] != 0){
+					throw new IllegalStateException();
+				}
+			}
+		}
+		
+		boolean worked = solveH(0);
+		
+		if(!worked){
+			for( int iR = 0; iR < board.length; iR++){
+				for( int iC = 0; iC < board.length; iC++){
+				board[iR][iC] = 0;
+				}
+			}
+		}
+		return worked;
+		
+	}
 
 
 
 
     public static void main( String[] args){
 		QueenBoard fourbyfour = new QueenBoard(4);
-		fourbyfour.addQueen(9, 3);
+		//fourbyfour.addQueen(9, 3);
+	    //System.out.println(fourbyfour.toString());
+		//System.out.println(fourbyfour.addQueen(2, 1));
+	    //System.out.println(fourbyfour.toString());
+		//fourbyfour.removeQueen(2, 3);
 	    System.out.println(fourbyfour.toString());
-		System.out.println(fourbyfour.addQueen(2, 1));
-	    System.out.println(fourbyfour.toString());
-		fourbyfour.removeQueen(2, 3);
-	    System.out.println(fourbyfour.toString());
+		System.out.println(fourbyfour.solve());
+		System.out.println(fourbyfour.toString());
     }
 
 }
