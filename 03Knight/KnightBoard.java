@@ -29,6 +29,11 @@ public class KnightBoard{
 
 
 
+    public static void main( String args[]){
+	KnightBoard e = new KnightBoard(4, 5);
+	System.out.println( e.toString());
+    }
+
 
 
 
