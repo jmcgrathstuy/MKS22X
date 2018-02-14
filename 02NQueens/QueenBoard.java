@@ -140,6 +140,24 @@ public class QueenBoard{
 		return worked;
 		
 	}
+	
+	public int countSolH( int col, int sum){
+		if( col == board.length){
+			return 1;
+		}
+		
+		for( int row = 0; row < board.length; row++){
+			if( addQueen( row, col)){
+				sum += countSolH(col + 1, sum);
+				removeQueen( row, col);
+			}
+		}
+		return sum;
+	}
+	
+	public int countSolutions(){
+		return countSolH( 0, 0);
+	}
 
 
 
@@ -155,5 +173,6 @@ public class QueenBoard{
 		System.out.println(fourbyfour.solve());
 		System.out.println(fourbyfour.toString());
     }
+	
 
 }
