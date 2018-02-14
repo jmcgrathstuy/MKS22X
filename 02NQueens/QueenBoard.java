@@ -27,7 +27,7 @@ public class QueenBoard{
     }
 
     private boolean addQueen(int r, int c){
-		if( board[r][c] != 0){
+		if(((r < 0) || (r >= board.length)) || ((c < 0) || (c >= board.length)) || board[r][c] != 0){
 			return false;
 		}
 		
@@ -66,7 +66,7 @@ public class QueenBoard{
 	private boolean removeQueen(int r, int c){
 
 	
-		if( board[r][c] != -1){
+		if(((r < 0) || (r >= board.length)) || ((c < 0) || (c >= board.length)) || board[r][c] != -1){
 			return false;
 		}
 		
@@ -105,7 +105,7 @@ public class QueenBoard{
 
     public static void main( String[] args){
 		QueenBoard fourbyfour = new QueenBoard(4);
-		fourbyfour.addQueen(2, 3);
+		fourbyfour.addQueen(9, 3);
 	    System.out.println(fourbyfour.toString());
 		System.out.println(fourbyfour.addQueen(2, 1));
 	    System.out.println(fourbyfour.toString());
