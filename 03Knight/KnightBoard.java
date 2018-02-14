@@ -15,6 +15,17 @@ public class KnightBoard{
 	
     }
 
+    public boolean isBlank( int[][] brd){
+	for(int iR = 0;  iR < startingRows; iR++){
+	    for(int iC = 0;  iC < startingCols; iC++){
+	        if( brd[iR][iC] != 0){
+		    return false;
+		}
+	    }
+	}
+	return true;
+    }
+
     public String toString(){
 	String str = "";
 	for(int iR = 0; iR < board.length; iR++){
