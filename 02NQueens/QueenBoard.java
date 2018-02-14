@@ -148,7 +148,7 @@ public class QueenBoard{
 		
 		for( int row = 0; row < board.length; row++){
 			if( addQueen( row, col)){
-				sum += countSolH(col + 1, sum);
+				sum += countSolH(col + 1, 0);
 				removeQueen( row, col);
 			}
 		}
