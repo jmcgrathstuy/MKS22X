@@ -3,73 +3,114 @@ public class QueenBoard{
     private int[][] board;
     
     public QueenBoard(int size){
-	board = new int[size][size];
-	for( int stepperRow = 0; stepperRow < size; stepperRow++){
-	    for( int stepperCol = 0; stepperCol < size; stepperCol++){
-		board[stepperRow][stepperCol] = 0;
-	    }
-	}
-    }
+		board = new int[size][size];
+		for( int stepperRow = 0; stepperRow < size; stepperRow++){
+			for( int stepperCol = 0; stepperCol < size; stepperCol++){
+			board[stepperRow][stepperCol] = 0;
+			}
+		}
+		}
 
     public String toString(){
 	String str = "";
 	for( int stepperRow = 0; stepperRow < board.length; stepperRow++){
 	    for(int stepperCol = 0; stepperCol < board.length; stepperCol++){
-		if( board[stepperRow][stepperCol] == -1){
-		    str += "Q";
-		}else{
-		    str += board[stepperRow][stepperCol];
-		}
-	    }
+			if( board[stepperRow][stepperCol] == -1){
+				str += "Q";
+			}else{
+				str += board[stepperRow][stepperCol];
+			}
+			}
 	    str += "\n";
 	}
 	return str;
     }
 
-    private void /*boolean*/ addQueen(int r, int c){
-	if( board[r][c] != 0){
-	    return false;
-	}else{
-	board[r][c] = -1;
-	//Add horiz and 
-	for( int iR = c, iU = r, iD = r, iL = c; /*make this work again*/; iR++, iU++, iD--, iL--){
-	    if(c != iR && c != iL){
-		board[iU][iR] += 1;
-		board[iD][iR] += 1;
-	    }
-	    if(r != iD && r != iU)
-		board[iR][c] += 1;
-	        board[r][iC] += 1;
-	    }
+    private boolean addQueen(int r, int c){
+		if( board[r][c] != 0){
+			return false;
+		}
+		
+		board[r][c] = -1;
+		
+
+		for( int i = 0; i < board.length; i++){
+			if( i != r){
+				board[i][c] += 1;
+			}
+			if( i != c){
+				board[r][i] += 1;
+			}
+		}
+		
+		for( int iU = r - 1, iR = c + 1; iU >= 0 && iR < board.length; iU--, iR++){
+			board[iU][iR] += 1;
+		}
+		for( int iU = r - 1, iL = c - 1; iU >= 0 && iL >= 0; iU--, iL--){
+			board[iU][iL] += 1;
+		}
+		for( int iD = r + 1, iL = c - 1; iL >= 0 && iD < board.length; iD++, iL--){
+			board[iD][iL] += 1;
+		}
+		for( int iD = r + 1, iR = c + 1; iR < board.length && iD < board.length; iD++, iR++){
+			board[iD][iR] += 1;
+		}
+		
+		return true;
+
 	}
+    
+    
+
+    
+	private boolean removeQueen(int r, int c){
+
+	
+		if( board[r][c] != -1){
+			return false;
+		}
+		
+		board[r][c] = 0;
+		
+
+		for( int i = 0; i < board.length; i++){
+			if( i != r){
+				board[i][c] -= 1;
+			}
+			if( i != c){
+				board[r][i] -= 1;
+			}
+		}
+		
+		for( int iU = r - 1, iR = c + 1; iU >= 0 && iR < board.length; iU--, iR++){
+			board[iU][iR] -= 1;
+		}
+		for( int iU = r - 1, iL = c - 1; iU >= 0 && iL >= 0; iU--, iL--){
+			board[iU][iL] -= 1;
+		}
+		for( int iD = r + 1, iL = c - 1; iL >= 0 && iD < board.length; iD++, iL--){
+			board[iD][iL] -= 1;
+		}
+		for( int iD = r + 1, iR = c + 1; iR < board.length && iD < board.length; iD++, iR++){
+			board[iD][iR] -= 1;
+		}
+		
+		return true;
+	
 	
 	}
-    
-    
-
-    
-/*private void /*boolean removeQueen(int r, int c){
-
-          board[r][c] = 0;
-          for( int iC = 0,  iR = 0; iC < board.length; iC++, iR++){
-             if(c != iC){
-		 board[r][iC] -= 1;
-             }
-             if(r != iR){
-                board[iR][c] -= 1;
-             }
-          }
-	  
-	   }
-	   }*/
 
 
 
 
     public static void main( String[] args){
-	QueenBoard fourbyfour = new QueenBoard(4);
-	fourbyfour.addQueen(2, 3);
-	System.out.println(fourbyfour.toString());
+		QueenBoard fourbyfour = new QueenBoard(4);
+		fourbyfour.addQueen(2, 3);
+	    System.out.println(fourbyfour.toString());
+		System.out.println(fourbyfour.addQueen(2, 1));
+	    System.out.println(fourbyfour.toString());
+		fourbyfour.removeQueen(2, 3);
+	    System.out.println(fourbyfour.toString());
     }
 
 }
