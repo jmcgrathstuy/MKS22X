@@ -156,6 +156,13 @@ public class QueenBoard{
 	}
 	
 	public int countSolutions(){
+		for( int iR = 0; iR < board.length; iR++){
+			for( int iC = 0; iC < board.length; iC++){
+				if( board[iR][iC] != 0){
+					throw new IllegalStateException();
+				}
+			}
+		}
 		return countSolH( 0, 0);
 	}
 
