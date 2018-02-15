@@ -16,8 +16,8 @@ public class KnightBoard{
     }
 
     public boolean isBlank( int[][] brd){
-	for(int iR = 0;  iR < startingRows; iR++){
-	    for(int iC = 0;  iC < startingCols; iC++){
+	for(int iR = 0;  iR < brd.length; iR++){
+	    for(int iC = 0;  iC < brd[0].length; iC++){
 	        if( brd[iR][iC] != 0){
 		    return false;
 		}
@@ -28,11 +28,15 @@ public class KnightBoard{
 
     public String toString(){
 	String str = "";
+	boolean blankness = isBlank(board);
 	for(int iR = 0; iR < board.length; iR++){
 	    for(int iC = 0;  iC < board[iR].length; iC++){
 		if(board[iR][iC] < 10){
 		    str += " " + board[iR][iC] + " ";
-		}else{
+		}
+		if(blankness){
+		    str += " _ ";
+		else{
 		    str += board[iR][iC] + " ";
 		}
 	    }
@@ -44,7 +48,7 @@ public class KnightBoard{
 
 
     public static void main( String args[]){
-	KnightBoard e = new KnightBoard(1, 5);
+	KnightBoard e = new KnightBoard(3, 5);
 	System.out.println( e.toString());
     }
 
