@@ -45,6 +45,90 @@ public class KnightBoard{
 	return str;
 	}
 
+	public boolean solve(int rowSt, int colSt){
+	    
+
+
+	}
+
+	public boolean solveH(int row, int col, int step){
+	    board[row][col] = step;
+	    if( step  == ( board.length * board[0].length)){
+		return true;
+	    }
+	    if( board[row][col] != 0){
+		return false;
+	    }
+
+	    if( board.size - row > 1 && board[0].size - col > 1){
+		/*if( row > 1 && col > 1){
+		    if(solveH( row - 2, col, step + 1)){
+			return true;
+		    }
+		    if(solveH( row, col - 2, step + 1)){
+			return true;
+		    }
+		}
+		if( row > 1 && col <= 1){
+		    if(solveH( row - 2, col, step + 1)){
+			return true;
+		    }
+		}
+		if( row <= 1 && col > 1){
+		    if(solveH( row, col - 2, step + 1)){
+			return true;
+		    }
+		    }*/
+
+		if( row - 2 >= 0 && col - 1 >= 0){
+		    if(solveH( row - 2, col - 1, step + 1)){
+			return true;
+		    }
+		}
+		if( row - 2 >= 0 && col + 1 <= board.size){
+		    if(solveH( row - 2, col + 1, step + 1)){
+			return true;
+		    }
+		}
+		if( row + 2 <= board.size && col - 1 >= 0){
+		    if(solveH( row + 2, col - 1, step + 1)){
+			return true;
+		    }
+		}
+		if( row + 2 <= board.size && col + 1 <= board.size){
+		    if(solveH( row + 2, col + 1, step + 1)){
+			return true;
+		    }
+		}
+
+		if( row - 2 >= 0 && col - 1 >= 0){
+		    if(solveH( row - 2, col - 1, step + 1)){
+			return true;
+		    }
+		}
+		if( row - 2 >= 0 && col + 1 <= board.size){
+		    if(solveH( row - 2, col + 1, step + 1)){
+			return true;
+		    }
+		}
+		if( row + 2 <= board.size && col - 1 >= 0){
+		    if(solveH( row + 2, col - 1, step + 1)){
+			return true;
+		    }
+		}
+		if( row + 2 <= board.size && col + 1 <= board.size){
+		    if(solveH( row + 2, col + 1, step + 1)){
+			return true;
+		    }
+		}
+
+		
+		
+		    
+		
+
+	    
+
 
 
     public static void main( String args[]){
