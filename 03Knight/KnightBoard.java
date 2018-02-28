@@ -15,10 +15,10 @@ public class KnightBoard{
 	
     }
 
-    public boolean isBlank( int[][] brd){
-	for(int iR = 0;  iR < brd.length; iR++){
-	    for(int iC = 0;  iC < brd[0].length; iC++){
-	        if( brd[iR][iC] != 0){
+    public boolean isBlank(){
+	for(int iR = 0;  iR < board.length; iR++){
+	    for(int iC = 0;  iC < board[0].length; iC++){
+	        if( board[iR][iC] != 0){
 		    return false;
 		}
 	    }
@@ -28,7 +28,7 @@ public class KnightBoard{
 
     public String toString(){
 	String str = "";
-	boolean blankness = isBlank(board);
+	boolean blankness = isBlank();
 	for(int iR = 0; iR < board.length; iR++){
 	    for(int iC = 0;  iC < board[iR].length; iC++){
 		if(blankness){
@@ -49,12 +49,18 @@ public class KnightBoard{
 	}
 
 	public boolean solve(int rowSt, int colSt){
+		if((rowSt < 0 || rowSt >= board.length) || ( colSt < 0) || (colSt >= board[0].length)){
+			throw new IllegalArgumentException();
+		}
+		if( !isBlank()){
+			throw new IllegalStateException();
+		}
 	    return solveH(rowSt, colSt, 1);
 
 
 	}
 
-	public boolean solveH(int row, int col, int step){
+	private boolean solveH(int row, int col, int step){
 		if( board[row][col] != 0){
 			return false;
 	    }
@@ -120,100 +126,80 @@ public class KnightBoard{
 	return false;
 	}
 	
-	/*public int countSolutions(int startingRow, int startingCol){
-		return countSolH(startingRow, startingCol, 0);
+	public int countSolutions(int startingRow, int startingCol){
+		if((startingRow < 0 || startingRow >= board.length) || ( startingCol < 0) || (startingCol >= board[0].length)){
+			throw new IllegalArgumentException();
+		}
+		if( !isBlank()){
+			throw new IllegalStateException();
+		}
+		return countSolH(startingRow, startingCol, 0, 1);
 	}
 	
-	public int countSolutions(int row, int col, int sum){
+	public int countSolH(int row, int col, int sum, int step){
 		if( board[row][col] != 0){
-			return 0
+			return 0;
 	    }
-	    board[row][col] = step;
 		int numWorked = 0;
 	    if( step  == ( board.length * board[0].length)){
-			return true;
+			return 1;
 	    }
 
 		if( row - 2 >= 0 && col - 1 >= 0){
-		    if(solveH( row - 2, col - 1, step + 1)){
+			board[row][col] = step;
+			sum += countSolH( row - 2, col - 1, 0, step + 1);
 			numWorked += 1;
-			sum += 
-		    }
+			board[row][col] = 0;
 		}
 		if( row - 2 >= 0 && col + 1 < board[0].length){
-		    if(solveH( row - 2, col + 1, step + 1)){
+			board[row][col] = step;
+		    sum += countSolH( row - 2, col + 1, 0, step + 1);
 			numWorked += 1;
-			return true;
-		    }
+			board[row][col] = 0;
 		}
 		if( row + 2 < board.length && col - 1 >= 0){
-		    if(solveH( row + 2, col - 1, step + 1)){
+			board[row][col] = step;
+		    sum += countSolH( row + 2, col - 1, 0, step + 1);
 			numWorked += 1;
-			return true;
-		    }
+			board[row][col] = 0;
 		}
 		if( row + 2 < board.length && col + 1 < board[0].length){
-		    if(solveH( row + 2, col + 1, step + 1)){
+			board[row][col] = step;
+		    sum += countSolH( row + 2, col + 1, 0, step + 1);
 			numWorked += 1;
-			return true;
-		    }
+			board[row][col] = 0;
 		}
-
 		if( row - 1 >= 0 && col - 2 >= 0){
-		    if(solveH( row - 1, col - 2, step + 1)){
+			board[row][col] = step;
+		    sum += countSolH( row - 1, col - 2, 0, step + 1);
 			numWorked += 1;
-			return true;
-		    }
+			board[row][col] = 0;
 		}
 		if( row - 1 >= 0 && col + 2 < board[0].length){
-		    if(solveH( row - 1, col + 2, step + 1)){
+			board[row][col] = step;
+		    sum += countSolH( row - 1, col + 2, 0, step + 1);
 			numWorked += 1;
-			return true;
-		    }
+			board[row][col] = 0;
 		}
 		if( row + 1 < board.length && col - 2 >= 0){
-		    if(solveH( row + 1, col - 2, step + 1)){
+			board[row][col] = step;
+		    sum += countSolH( row + 1, col - 2, 0, step + 1);
 			numWorked += 1;
-			return true;
-		    }
+			board[row][col] = 0;
 		}
 		if( row + 1 < board.length && col + 2 < board[0].length){
-		    if(solveH( row + 1, col + 2, step + 1)){
+			board[row][col] = step;
+		    sum += countSolH( row + 1, col + 2, 0, step + 1);
 			numWorked += 1;
-			return true;
-		    }
+			board[row][col] = 0;
 		}
 		if( numWorked == 0){
 			board[row][col] = 0;
 			return 0;
 		}
-	return false;
+	return sum;
 		
 		
-	}*/
-
-		
-		
-		    
-		
-
-	    
-
-
-
-    public static void main( String args[]){
-	KnightBoard e = new KnightBoard(5, 5);
-	System.out.println( e.toString());
-	System.out.println( e.solve(3, 4));
-	System.out.println( e.toString());
-    }
-
-
-
-
-
-
-
-
+	}
 
 }
