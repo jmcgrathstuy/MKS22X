@@ -130,14 +130,14 @@ public class Maze{
 	    return 0;
 	}
 
-	if(solve(r + 1, c) != -1){
+	if(solve(r + 1, c, count) != -1){
 	    maze[r][c] = '@';
 	    return  ///I want to put the solve() here or maybe get a variable to temp store the number;; or maybe rework count?
 	}
-	if(solve(r - 1, c) != -1){
+	if(solve(r - 1, c, count) != -1){
 	    maze[r][c] = '@';
 	}
-	if(solve(r, c + 1) != -1){
+	if(solve(r, c + 1, count) != -1){
 	    maze[r][c] = '@';
 	}
 	if(solve(r, c - 1) != -1){
