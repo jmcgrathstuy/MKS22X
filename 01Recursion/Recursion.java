@@ -4,7 +4,7 @@ public class Recursion{
 	Recursion(){
 	}
 	
-	public long fact(int n){
+	public int fact(int n){
 		if( n < 0){
 			throw new IllegalArgumentException("Argument must not be negative");
 		}
