@@ -27,6 +27,23 @@ public class Maze{
     public Maze(String filename){
         //COMPLETE CONSTRUCTOR
 
+	File text = new File("Maze.txt");// can be a path like: "/full/path/to/file.txt"
+	int rowSize;
+	int colSize;
+        
+
+        //inf stands for the input file
+
+        Scanner inf = new Scanner(text);
+	String mine = inf.netLine();
+
+        while(inf.hasNextLine()){
+            String line = inf.nextLine();
+            System.out.println(line);
+	    //establish rowSize and colSize once maybe outside of the loop idk im in a rush this is on you
+	    //then fill it in inside of another loop or something
+        }
+
 	animate = false;
     }
     
@@ -64,8 +81,8 @@ public class Maze{
 
     */
     public int solve(){
-	int sR;
-	int cR;
+	int sR = 9999;
+	int sC = 9999;
 	
 
             //find the location of the S.
@@ -80,11 +97,11 @@ public class Maze{
 
 
             //erase the S
-	maze[sR][cR] = '';
+	maze[sR][sC] = '\0';
 
 
             //and start solving at the location of the s.
-	return solve(sR, sC);
+	return solve(sR, sC, 0);
 
             //return solve(???,???);
 
@@ -108,7 +125,7 @@ public class Maze{
             Note: This is not required based on the algorithm, it is just nice visually to see.
         All visited spots that are part of the solution are changed to '@'
     */
-    private int solve(int row, int col, int count){ //you can add more parameters since this is private
+    private int solve(int r, int c, int count){ //you can add more parameters since this is private
 
 
         //automatic animation! You are welcome.
@@ -122,6 +139,7 @@ public class Maze{
 
         //COMPLETE SOLVE
 
+
 	if( maze[r][c] == '#' || maze[r][c] == '.'){
 	    return -1;
 	}
@@ -130,31 +148,54 @@ public class Maze{
 	    return 0;
 	}
 
-	if(solve(r + 1, c, count) != -1){
+	/*if(solve(r + 1, c, count + 1) != -1){
 	    maze[r][c] = '@';
-	    return  ///I want to put the solve() here or maybe get a variable to temp store the number;; or maybe rework count?
+	    return  ///I want to put the solve() here or maybe get a variable to temp store the number;; or maybe rework count?;; don't do that btw
 	}
-	if(solve(r - 1, c, count) != -1){
-	    maze[r][c] = '@';
-	}
-	if(solve(r, c + 1, count) != -1){
+	if(solve(r - 1, c, count + 1) != -1){
 	    maze[r][c] = '@';
 	}
-	if(solve(r, c - 1) != -1){
+	if(solve(r, c + 1, count + 1) != -1){
 	    maze[r][c] = '@';
 	}
-
-	
-	    
-
-	
-
-
-
-	
-
-        return -1; //so it compiles
+	if(solve(r, c - 1, count +1) != -1){
+	    maze[r][c] = '@';
+	    }*/
+	if( maze[r + 1][c] == '#' || maze[r + 1][c] == '.'){
+	    maze[r][c] = '@';
+	    return solve( r + 1, c, count) + 1;
+	}
+        if( maze[r - 1][c] == '#' || maze[r - 1][c] == '.'){
+	    maze[r][c] = '@';
+	    return solve( r - 1, c, count) + 1;
+	}
+	if( maze[r][c + 1] == '#' || maze[r][c + 1] == '.'){
+	    maze[r][c] = '@';
+	    return solve( r, c + 1, count) + 1;
+	}
+	if( maze[r][c - 1] == '#' || maze[r][c - 1] == '.'){
+	    maze[r][c] = '@';
+	    return solve( r, c - 1, count) + 1;
+	}
+	maze[r][c] = '.';
+	return -1;
     }
 
+
+
+    public static void main(String[] args) throws FileNotFoundException{
+	        //instead of a try/catch, you can throw the FileNotFoundException.
+        File text = new File("Maze.txt");// can be a path like: "/full/path/to/file.txt" 
+        
+
+        //inf stands for the input file
+
+        Scanner inf = new Scanner(text);
+
+        while(inf.hasNextLine()){
+            String line = inf.nextLine();
+            System.out.println(line);
+        }
+    }
 
 }
