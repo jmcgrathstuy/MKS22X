@@ -24,27 +24,66 @@ public class Maze{
 
     */
 
-    public Maze(String filename){
+    public Maze(String filename) throws FileNotFoundException{
         //COMPLETE CONSTRUCTOR
 
-	File text = new File("Maze.txt");// can be a path like: "/full/path/to/file.txt"
-	int rowSize;
-	int colSize;
+		File text = new File(filename);
+		int numCols = 999;
+		int numRows = 0;
         
+		Scanner inf = new Scanner(text);
 
-        //inf stands for the input file
-
-        Scanner inf = new Scanner(text);
-	String mine = inf.netLine();
-
-        while(inf.hasNextLine()){
+		int rowAt = 0;
+		int buddy = 0;
+		
+		while(inf.hasNextLine()){
             String line = inf.nextLine();
-            System.out.println(line);
-	    //establish rowSize and colSize once maybe outside of the loop idk im in a rush this is on you
-	    //then fill it in inside of another loop or something
+			if(numCols == 999){
+				numCols = line.length();
+			}
+			numRows += 1;
         }
+		
+		maze = new char[numRows][numCols];
+		
+		inf = new Scanner(text);
+		
+		while(inf.hasNextLine()){
+			String line = inf.nextLine();
+			for( int i = 0; i < line.length(); i++){
+				maze[rowAt][i] = line.charAt(i);
+			}
+			rowAt++;
+        }
+		int countS = 0;
+		int countE = 0;
+		for(int sR = 0; sR < numRows; sR++){
+			for(int sC = 0; sC < numCols; sC++){
+				if( maze[sR][sC] == 'S'){
+					countS++;
+				}
+				if( maze[sR][sC] == 'E'){
+					countE++;
+				}
+			}
+		}
+		if( countS != 1 || countE != 1){
+			throw new IllegalStateException();
+		}
+		
 
-	animate = false;
+		animate = false;
+    }
+	
+	public String toString(){
+		String str = "";
+		for( int sR = 0; sR < maze.length; sR++){
+			for(int sC = 0; sC < maze[sR].length; sC++){
+				str += maze[sR][sC];
+			}
+			str += "\n";
+		}
+		return str;
     }
     
 
@@ -68,7 +107,8 @@ public class Maze{
 
         //erase terminal, go to top left of screen.
 
-        System.out.println("\033[2J\033[1;1H");
+        //System.out.println("\033[2J\033[1;1H");
+		System.out.flush();  
 
     }
 
@@ -81,31 +121,31 @@ public class Maze{
 
     */
     public int solve(){
-	int sR = 9999;
-	int sC = 9999;
+		int sR = 9999;
+		int sC = 9999;
 	
 
             //find the location of the S.
-	for(int r = 0; r < maze.length; r++){
-	    for(int c = 0; c < maze[r].length; c++){
-		if( maze[r][c] == 'S'){
-		    sR = r;
-		    sC = c;
+		for(int r = 0; r < maze.length; r++){
+			for(int c = 0; c < maze[r].length; c++){
+			if( maze[r][c] == 'S'){
+				sR = r;
+				sC = c;
+			}
+			}
 		}
-	    }
-	}
 
 
             //erase the S
-	maze[sR][sC] = '\0';
+		maze[sR][sC] = '\0';
 
 
             //and start solving at the location of the s.
-	return solve(sR, sC, 0);
+		return solve(sR, sC, 0);
 
             //return solve(???,???);
 
-    }
+	}
 
     /*
       Recursive Solve function:
@@ -139,43 +179,54 @@ public class Maze{
 
         //COMPLETE SOLVE
 
+	int a = 88;
+	int b = 88;
+	int g = 88;
+	int d = 88;
 
 	if( maze[r][c] == '#' || maze[r][c] == '.'){
 	    return -1;
 	}
 
 	if( maze[r][c] == 'E'){
-	    return 0;
+	    return count;
 	}
-
-	/*if(solve(r + 1, c, count + 1) != -1){
+	//ORDER OF OPERATIONS: UP, DOWN, RIGHT, LEFT
+	if( maze[r + 1][c] == ' ' || maze[r + 1][c] == 'E'){
 	    maze[r][c] = '@';
-	    return  ///I want to put the solve() here or maybe get a variable to temp store the number;; or maybe rework count?;; don't do that btw
+	    a = solve( r + 1, c, count + 1);
+		if( a == -1){
+			maze[r][c] = '.';
+		}else{
+			return a;
+		}
 	}
-	if(solve(r - 1, c, count + 1) != -1){
+    if( maze[r - 1][c] == ' ' || maze[r - 1][c] == 'E'){
 	    maze[r][c] = '@';
+	    b = solve( r - 1, c, count + 1);
+		if( b == -1){
+			maze[r][c] = '.';
+		}else{
+			return b;
+		}
 	}
-	if(solve(r, c + 1, count + 1) != -1){
+	if( maze[r][c + 1] == ' ' || maze[r][c + 1] == 'E'){
 	    maze[r][c] = '@';
+	    g = solve( r, c + 1, count + 1);
+		if( g == -1){
+			maze[r][c] = '.';
+		}else{
+			return g;
+		}
 	}
-	if(solve(r, c - 1, count +1) != -1){
+	if( maze[r][c - 1] == ' ' || maze[r][c - 1] == 'E'){
 	    maze[r][c] = '@';
-	    }*/
-	if( maze[r + 1][c] == '#' || maze[r + 1][c] == '.'){
-	    maze[r][c] = '@';
-	    return solve( r + 1, c, count) + 1;
-	}
-        if( maze[r - 1][c] == '#' || maze[r - 1][c] == '.'){
-	    maze[r][c] = '@';
-	    return solve( r - 1, c, count) + 1;
-	}
-	if( maze[r][c + 1] == '#' || maze[r][c + 1] == '.'){
-	    maze[r][c] = '@';
-	    return solve( r, c + 1, count) + 1;
-	}
-	if( maze[r][c - 1] == '#' || maze[r][c - 1] == '.'){
-	    maze[r][c] = '@';
-	    return solve( r, c - 1, count) + 1;
+	    d = solve( r, c - 1, count + 1);
+		if( d == -1){
+			maze[r][c] = '.';
+		}else{
+			return d;
+		}
 	}
 	maze[r][c] = '.';
 	return -1;
