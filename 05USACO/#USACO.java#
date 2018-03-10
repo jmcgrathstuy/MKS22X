@@ -1,0 +1,51 @@
+public class USACO{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static int silver(String filename){
+	File text = new File(filename);
+	int numCols = 999;
+	int numRows = 0;
+        
+        Scanner inf = new Scanner(text);
+    }
+
+
+
+
+    
+}
