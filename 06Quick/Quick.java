@@ -15,6 +15,8 @@ public class Quick{
 
     public void partition(int[] ary, int lo, int hi){
 	int p = math.Random(lo, hi);
+
+	//also later do the recursion inside of quicksort/select
 	
 
 
