@@ -14,12 +14,19 @@ public class Quick{
     }
 
     public void partition(int[] ary, int lo, int hi){
-	int p = math.Random(lo, hi);
+	Random rand = new Random();
+	int p = rand.nextInt(data.length);
 	swap( ary, lo, p);
 	int i = p + 1;
 	whlie( i <= hi){
 	    if( ary[i] == ary[p]){
-		i++;
+		    i++;
+		}
+		if( ary[i] > ary[p]){
+			swap( ary, i, hi);
+			hi--;
+		}else{
+			swap( ary, 
 
 
 
