@@ -38,6 +38,9 @@ public class Merge{
 	if( lo >= hi){
 	    return;
 	}
+	for( int i = 0; i < data.length; i++){
+	    temp[i] = data[i];
+	}
 	int mid = (hi + lo) / 2;
 	mSort( temp, data, lo, mid);
 	mSort( temp, data, mid + 1, hi);
