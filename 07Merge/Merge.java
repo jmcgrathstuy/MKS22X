@@ -9,8 +9,13 @@ public class Merge{
         //int i = 0;  replace i with aStart
         //int j = 0;  replace j with bStart
         //int[] dataToo = new int[a.length + b.length];
-        for(int k = 0; (aStart <= aEnd || bStart <= bEnd) &&  k < temp.length; k++){
+        for(int k = aStart; (aStart <= aEnd || bStart <= bEnd) &&  k < bEnd;){
+	    System.out.println( "k = " + k + "\naStart = " + aStart + "\nbStart = " + bStart);
             if( aStart == aEnd){
+		System.out.println(" if #1");
+		temp[k] = data[aStart];
+		aStart++;
+		k++;
                 while( k < temp.length){
                     temp[k] = data[bStart];
                     bStart++;
@@ -19,14 +24,19 @@ public class Merge{
                 return;
 	    }
             if( bStart == bEnd){
+		System.out.println(" if #2");
+		temp[k] = data[bStart];
+		bStart++;
+		k++;
                 while( k < temp.length){
-                temp[k] = data[aStart];
-                aStart++;
-                k++;
+		    temp[k] = data[aStart];
+		    aStart++;
+		    k++;
                 }
 		return;
 	    }
 	    if(data[aStart] == data[bStart]){
+		System.out.println(" if #3");
 		temp[k] = data[aStart];
 		temp[k + 1] = data[bStart];
 		aStart++;
@@ -42,7 +52,7 @@ public class Merge{
 		temp[k] = data[bStart];
 		bStart++;
 		k++;
-	    }
+		}
 	    
 	}
     }
@@ -79,14 +89,22 @@ public class Merge{
                
 
     public static void main(String[] args){
-	System.out.println( 5/2);
-	int[] a = {2, 5, 3, 8, 5, 6, 3};
-	int[] b = {2, 5, 3, 8, 5, 6, 3};
-	merge( a, b, 0, 4, 5, 6);
+	//System.out.println( 5/2);
+	int[] a = {5, 7, 9, 837, 1, 6, 14, 999};
+        int[] b = {5, 7, 9, 837, 1, 6, 14, 999};
+	merge( a, b, 0, 3, 4, 7);
 	for( int i = 0; i < b.length; i++){
 	    
 	System.out.println(b[i]);
 	}
+
+	int[] c = {5, 7, 9, 837, 1, 6, 14, 999};
+	mergeSort(c);
+	for( int i = 0; i < b.length; i++){
+	    
+	System.out.println(b[i]);
+	}
+	
     }
 
 
