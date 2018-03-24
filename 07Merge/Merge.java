@@ -48,14 +48,19 @@ public class Merge{
     }
 
     public static void mergeSort(int[] data){
+	int[] temp = new int[data.length];
+	for( int i = 0; i < data.length; i++){
+	    temp[i] = data[i];
+	}
+	mSort(data, temp, 0, data.length - 1);
     }
     private static void mSort(int[] data, int[] temp, int lo, int hi){
 	if( lo >= hi){
 	    return;
 	}
-	for( int i = 0; i < data.length; i++){
-	    temp[i] = data[i];
-	}
+	//for( int i = 0; i < data.length; i++){
+	//    temp[i] = data[i];
+	//}
 	int mid = (hi + lo) / 2;
 	mSort( temp, data, lo, mid);
 	mSort( temp, data, mid + 1, hi);
