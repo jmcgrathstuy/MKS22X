@@ -10,9 +10,9 @@ public class Merge{
         //int j = 0;  replace j with bStart
         //int[] dataToo = new int[a.length + b.length];
         for(int k = aStart; (aStart <= aEnd || bStart <= bEnd) &&  k < bEnd;){
-	    System.out.println( "k = " + k + "\naStart = " + aStart + "\nbStart = " + bStart);
+	    //System.out.println( "k = " + k + "\naStart = " + aStart + "\nbStart = " + bStart);
             if( aStart == aEnd){
-		System.out.println(" if #1");
+		//System.out.println(" if #1");
 		temp[k] = data[aStart];
 		aStart++;
 		k++;
@@ -24,7 +24,7 @@ public class Merge{
                 return;
 	    }
             if( bStart == bEnd){
-		System.out.println(" if #2");
+		//System.out.println(" if #2");
 		temp[k] = data[bStart];
 		bStart++;
 		k++;
@@ -36,7 +36,7 @@ public class Merge{
 		return;
 	    }
 	    if(data[aStart] == data[bStart]){
-		System.out.println(" if #3");
+		//System.out.println(" if #3");
 		temp[k] = data[aStart];
 		temp[k + 1] = data[bStart];
 		aStart++;
@@ -74,7 +74,7 @@ public class Merge{
 	int mid = (hi + lo) / 2;
 	mSort( temp, data, lo, mid);
 	mSort( temp, data, mid + 1, hi);
-	merge( data, temp, lo, mid, mid + 1, hi);
+	merge( temp, data, lo, mid, mid + 1, hi);
     }
 	
 
@@ -91,18 +91,18 @@ public class Merge{
     public static void main(String[] args){
 	//System.out.println( 5/2);
 	int[] a = {5, 7, 9, 837, 1, 6, 14, 999};
-        int[] b = {5, 7, 9, 837, 1, 6, 14, 999};
+    int[] b = {5, 7, 9, 837, 1, 6, 14, 999};
 	merge( a, b, 0, 3, 4, 7);
 	for( int i = 0; i < b.length; i++){
 	    
-	System.out.println(b[i]);
+	//System.out.println(b[i]);
 	}
 
-	int[] c = {5, 7, 9, 837, 1, 6, 14, 999};
+	int[] c = {1, 1, 1, 1, 2, 1, 1, 1, 1, 1};
 	mergeSort(c);
 	for( int i = 0; i < b.length; i++){
 	    
-	System.out.println(b[i]);
+	System.out.println(c[i]);
 	}
 	
     }
