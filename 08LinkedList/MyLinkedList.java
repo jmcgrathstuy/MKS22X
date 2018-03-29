@@ -24,6 +24,11 @@ public class MyLinkedList{
     }
     public int get(int i){
 	//fill in
+	Node cur = first;
+	for( int j = 0;  j < i; j++){
+	    cur = cur.next;
+	}
+	return cur.getData();
     }
     public String printComp(int step,Node cur){
 	if( step + 1 == size()){
