@@ -1,5 +1,17 @@
 public class MyLinkedList{
 
+    //CURRENT THINGS TO DO
+    //
+    //ADD EXCEPTIONS
+    //
+    //Store Integer objects instead of ints (aka get rid of the .intValue()'s and
+    //redo the Node class a little bit.
+    //
+
+
+
+    
+
     int size;
     Node first;
     Node last;
@@ -42,12 +54,6 @@ public class MyLinkedList{
 	    cur = cur.getNext();
 	}
 	return cur.getData();
-    }
-    public String printComp(int step,Node cur){
-	if( step + 1 == size()){
-	    return "" + cur.getData();
-	}
-	return cur.getData() + printComp( step + 1, cur.getNext());
     }
 	
     public String toString(){
