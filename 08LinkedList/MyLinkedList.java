@@ -17,16 +17,29 @@ public class MyLinkedList{
     public int size(){
 	return size;
     }
-    public boolean add( int value){
-	Node newNode = new Node( value);
+    //
+    public boolean add( Integer value){
+	Node newNode = new Node( value.intValue());
 	last.setNext(newNode);
 	last = newNode;
+	return true;
     }
-    public int get(int i){
+    public void add( int index, Integer value){
+	///ADD EXCEPTIONS
+	Node cur = first;
+	for( int i = 0; i < index; i++){
+	    cur = cur.getNext();
+	}
+	cur.setData( value.intValue());
+    }
+
+
+    
+    public int get(int index){
 	//fill in
 	Node cur = first;
-	for( int j = 0;  j < i; j++){
-	    cur = cur.next;
+	for( int i = 0;  i < index; i++){
+	    cur = cur.getNext();
 	}
 	return cur.getData();
     }
@@ -38,10 +51,24 @@ public class MyLinkedList{
     }
 	
     public String toString(){
-	String str = "";
+	String str = "[";
+	Node cur = first;
 	for( int i = 0; i < size(); i++){
+	    str += cur.getData();
+	    if( i  != size() - 1){
+		str += ", ";
+	    }
+	    cur = cur.getNext();
 	}
+	str += "]";
+	return str;
     }
+
+    public static void main(String[] args){
+	MyLinkedList l = new MyLinkedList();
+	l.add(new Integer(89));
+    }
+	
 
 	    
 	    
