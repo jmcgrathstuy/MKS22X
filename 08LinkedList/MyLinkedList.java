@@ -32,11 +32,13 @@ public class MyLinkedList{
     //
     public boolean add( Integer value){
 	Node newNode = new Node( value.intValue());
-	last.setNext(newNode);
+	if( size() != 0){
+	    last.setNext(newNode);
+	}
 	last = newNode;
 	return true;
     }
-    public void add( int index, Integer value){
+    public void set( int index, Integer value){
 	///ADD EXCEPTIONS
 	Node cur = first;
 	for( int i = 0; i < index; i++){
@@ -73,6 +75,9 @@ public class MyLinkedList{
     public static void main(String[] args){
 	MyLinkedList l = new MyLinkedList();
 	l.add(new Integer(89));
+	l.add(new Integer(900));
+	l.add(new Integer(2));
+	System.out.println( l.toString());
     }
 	
 
