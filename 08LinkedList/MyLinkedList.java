@@ -32,32 +32,48 @@ public class MyLinkedList{
     //
     public boolean add( Integer value){
 	Node newNode = new Node( value);
+	if( size() == 0){
+	    first = newNode;
+	}
 	if( size() != 0){
 	    last.setNext(newNode);
 	}
 	last = newNode;
+	size += 1;
 	return true;
     }
-    public void set( int index, Integer value){
+    public Integer set( int index, Integer value){
 	///ADD EXCEPTIONS
 	Node cur = first;
 	for( int i = 0; i < index; i++){
 	    cur = cur.getNext();
 	}
-	cur.setData( value.intValue());
+	Integer oldData = cur.getData();
+	cur.setData( value);
+	return oldData;
     }
     public void add( int index, Integer value){
-        Node prev = getNode(index - 1)
+	Node newNode = new Node(value);
+	if( size() == 0){
+	    first = newNode;
+	    last = newNode;
+	}
+	if( index == 0){
+	    //SOMETHING
+	}
+	    
+        Node prev = getNode(index - 1);
 	Node newNode = new Node(value);
 	newNode.setNext(prev.getNext());
 	newNode.setPrev(prev);
 	prev.setNext(newNode);
 	newNode.getNext().setPrev(newNode);
+	size += 1;
     }
 	
 
     
-    public int get(int index){
+    public Integer get(int index){
 	//fill in
 	Node cur = first;
 	for( int i = 0;  i < index; i++){
@@ -65,16 +81,14 @@ public class MyLinkedList{
 	}
 	return cur.getData();
     }
-    private Node GetNode( int index){
+    private Node getNode( int index){
 	    Node cur = first;
 	    for( int i = 0; i < index; i++){
 	        cur = cur. getNext();
 	    }
 	    return cur;
     }
-		
-
-	
+    
     public String toString(){
 	String str = "[";
 	Node cur = first;
@@ -82,7 +96,7 @@ public class MyLinkedList{
 	    str += cur.getData();
 	    if( i  != size() - 1){
 		str += ", ";
-	    }
+		}
 	    cur = cur.getNext();
 	}
 	str += "]";
@@ -94,7 +108,20 @@ public class MyLinkedList{
 	l.add(new Integer(89));
 	l.add(new Integer(900));
 	l.add(new Integer(2));
+	l.add( 4, new Integer(5));
 	System.out.println( l.toString());
+
+	////
+	///KNOWN ISSUES AS OF MOST RECENT CHANGE
+	///
+	//Adding to index 0 instead adds to index 1
+	///
+	//Adding to the last index + 1 errors
+	///
+	//Adding to any further position also errors but for the same reason
+	//this should be a built in exception thing in the future
+	///
+	////
     }
 	
 
