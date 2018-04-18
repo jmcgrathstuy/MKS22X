@@ -1,0 +1,23 @@
+import java.util.*;
+public interface Deque<String> extends Queue<String>{
+    int size;
+
+    public Deque(){
+	size = 10;
+    }
+
+    public Deque(int initialCapacity){
+	size = initialCapacity;
+    }
+
+
+    public void AddFirst(String str){
+    }
+    
+
+
+
+
+
+
+}
