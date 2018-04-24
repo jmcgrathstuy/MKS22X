@@ -14,7 +14,13 @@ public class ExpressionTree{
   /* The sample tree would be: "3 2 10 * +"     */
   public String toStringPostfix(){
     /*you are to write this method*/
-    return "";
+      if( isValue()){
+	  return "" +  getValue();
+      }else{
+	  String a = getLeft().toStringPostfix();
+	  String b = getRight().toStringPostfix();
+	  return a + " " + b + " " + getOp();
+      }
   }
   
   /*return the expression as a prefix notation string without parenthesis*/
@@ -22,7 +28,13 @@ public class ExpressionTree{
   
   public String toStringPrefix(){
     /*you are to write this method*/
-    return "";
+    if( isValue()){
+	  return "" +  getValue();
+      }else{
+	  String a = getLeft().toStringPostfix();
+	  String b = getRight().toStringPostfix();
+	  return "" + getOp() + " " + a + " " + b;
+      }
   }
   
   
