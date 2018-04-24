@@ -1,9 +1,6 @@
 public class ExpressionTree{
   
 
-  
-  /*return the expression as an infix notation string with parenthesis*/
-  /* The sample tree would be: "( 3 + (2 * 10))"     */
   public String toString(){
       if( isValue()){
 	  return "" +  getValue();
@@ -13,9 +10,7 @@ public class ExpressionTree{
 	  return "(" +  a + " " + getOp() + " " + b + ")";
       }
   }
-  
-  /*return the expression as a postfix notation string without parenthesis*/
-  /* The sample tree would be: "3 2 10 * +"     */
+    
   public String toStringPostfix(){
       if( isValue()){
 	  return "" +  getValue();
@@ -26,9 +21,6 @@ public class ExpressionTree{
       }
   }
   
-  /*return the expression as a prefix notation string without parenthesis*/
-  /* The sample tree would be: "+ 3 * 2 10"     */
-  
   public String toStringPrefix(){
     if( isValue()){
 	  return "" +  getValue();
@@ -38,11 +30,7 @@ public class ExpressionTree{
 	  return "" + getOp() + " " + a + " " + b;
       }
   }
-  
-  
-  
 
-  /*return the value of the specified expression tree*/
   public double evaluate(){
       if( isValue()){
 	  return getValue();
@@ -51,7 +39,6 @@ public class ExpressionTree{
       }
   }
 
-  /*use the correct operator on both a and b, and return that value*/
   private double apply(char op, double a, double b){
       if( op == '+'){
 	  return a + b;
@@ -68,12 +55,8 @@ public class ExpressionTree{
       return 999;
   }
 
-
-
-
-
-  ////////////////////ONLY EDIT ABOVE THIS LINE////////////////////
-
+    //     ////////////////////ONLY  EDIT  ABOVE THIS LINE////////////////////
+    //     \\\\\\\\\\\\\\\\\\\\DO NOT EDIT BELOW THIS LINE\\\\\\\\\\\\\\\\\\\\
 
 
   
