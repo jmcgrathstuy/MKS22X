@@ -25,21 +25,27 @@ public class USACO{
 	/*for( int i = 0; i < 4; i++){
 	    System.out.println( b[i]);
 	    }*/
-	r = (int)b[0];
-	c = (int)b[1];
-	e = (int)b[2];
-	n = (int)b[3];
+	r = Integer.parseInt(b[0]);
+	c = Integer.parseInt(b[1]);
+	e = Integer.parseInt(b[2]);
+	n = Integer.parseInt(b[3]);
 	field = new int[r][c];
+	fieldS = new String[r][c];
 	list.remove(0);
 
 	for( int i = 0; i < r; i++){
-	    fieldS[r] = list.get( i).split(" ");
+	    fieldS[i] = list.get( i).split(" ");
 	}
 	for( int i = 0; i < r; i++){
 	    for( int j = 0; j < c; j++){
-		field[i][j] = (int )fieldS[i][j];
+		field[i][j] = Integer.parseInt(fieldS[i][j]);
 	    }
 	}
+
+	for( int i = r; i < list.size(); i++){
+	    
+
+	
 
 	
 		
